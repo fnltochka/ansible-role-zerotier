@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/m4rcu5nl/ansible-role-zerotier.svg?branch=master)](https://travis-ci.org/m4rcu5nl/ansible-role-zerotier) [![GitHub issues](https://img.shields.io/github/issues/m4rcu5nl/ansible-role-zerotier.svg)](https://github.com/m4rcu5nl/ansible-role-zerotier/issues)
+[![Build Status](https://travis-ci.org/fnltochka/ansible-role-zerotier.svg?branch=master)](https://travis-ci.org/fnltochka/ansible-role-zerotier) [![GitHub issues](https://img.shields.io/github/issues/fnltochka/ansible-role-zerotier.svg)](https://github.com/fnltochka/ansible-role-zerotier/issues)
 
 # ZeroTier
 
@@ -65,7 +65,7 @@ _Description_: Option to delegate tasks for Zerotier API calls. This is useful i
     zerotier_register_short_hostname: true
 
   roles:
-    - { role: m4rcu5nl.zerotier-one, become: true }
+    - { role: fnltochka.zerotier-one, become: true }
 ```
 
 ## Example Inventory
