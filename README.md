@@ -87,7 +87,7 @@ _Description_: Option to delegate tasks for Zerotier API calls. This is useful i
     zerotier_network_id: 1234567890qwerty
     zerotier_api_accesstoken: "{{ vault_zerotier_accesstoken }}"
     zerotier_register_short_hostname: true
-    zerotier_allow_dns: '1'
+    zerotier_allow_dns: "1"
 
   roles:
     - { role: fnltochka.zerotier, become: true }
