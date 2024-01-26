@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/fnltochka/ansible-role-zerotier.svg?branch=master)](https://travis-ci.org/fnltochka/ansible-role-zerotier) [![GitHub issues](https://img.shields.io/github/issues/fnltochka/ansible-role-zerotier.svg)](https://github.com/fnltochka/ansible-role-zerotier/issues)
+[![GitHub issues](https://img.shields.io/github/issues/fnltochka/ansible-role-zerotier.svg)](https://github.com/fnltochka/ansible-role-zerotier/issues)
 
 # ZeroTier
 
@@ -28,8 +28,8 @@ _Description_: By default `inventory_hostname` will be used to name a member in 
 ### zerotier_member_ip_assignments
 
 _Type_: list  
-_Default value_: `[]`  
-_Description_: A list of IP addresses to assign this member. The member will be automatically assigned an address on the network if left out.
+_Default value_: `""`  
+_Description_: A list of IP addresses to assign this member. For example, “[192.168.0.1, 192.168.0.2]". If you write “[]”, the system will select the addresses for you. If you don't write anything, the IP addresses will remain the same.
 
 ### zerotier_member_description
 
@@ -65,7 +65,7 @@ _Description_: Option to delegate tasks for Zerotier API calls. This is useful i
     zerotier_register_short_hostname: true
 
   roles:
-    - { role: fnltochka.zerotier-one, become: true }
+    - { role: fnltochka.zerotier, become: true }
 ```
 
 ## Example Inventory
