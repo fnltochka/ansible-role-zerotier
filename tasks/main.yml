@@ -23,3 +23,8 @@
   ansible.builtin.import_tasks: join_network.yml
   when:
     - zerotier_network_id is defined
+
+- name: Tasks file settings.yml
+  ansible.builtin.import_tasks: settings.yml
+  when:
+    - zerotier_network_id is defined
