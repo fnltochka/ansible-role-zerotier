@@ -1,38 +1,38 @@
 - name: Add ZeroTier PGP key
-  apt_key:
+  ansible.builtin.apt_key:
     url: "{{ zerotier_gpg_url }}"
     id: "{{ zerotier_gpg_fingerprint }}"
 
 - name: Check if Ubuntu release has dedicated repo
-  uri:
+  ansible.builtin.uri:
     url: "{{ zerotier_download_base_url }}/debian/{{ zerotier_deb_release_repo }}"
   failed_when: false
   when:
     - ansible_facts['distribution'] == "Ubuntu"
   register: release_repo
 
-- block:
+- name: Check Ubuntu repo status
+  when:
+    - ansible_facts['distribution'] == "Ubuntu"
+    - release_repo.status == 404
+  block:
     - name: Overwrite Ubuntu release repo name for cosmic
-      set_fact:
+      ansible.builtin.set_fact:
         zerotier_deb_release_repo: bionic
       when:
         - ansible_facts['distribution_major_version'] == "18"
 
     - name: Overwrite Ubuntu release repo name for focal
-      set_fact:
+      ansible.builtin.set_fact:
         zerotier_deb_release_repo: bionic
       when:
         - ansible_facts['distribution_major_version'] == "20"
 
     - name: Re-gather facts
-      setup: ~
-
-  when:
-    - ansible_facts['distribution'] == "Ubuntu"
-    - release_repo.status == 404
+      ansible.builtin.setup: ~
 
 - name: Add ZeroTier APT repository
-  apt_repository:
+  ansible.builtin.apt_repository:
     repo: deb {{ zerotier_download_base_url }}/debian/{{ zerotier_deb_release_repo }} {{ zerotier_deb_release_repo }} main
     filename: zerotier
   register: zerotier_repo

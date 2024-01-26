@@ -1,7 +1,13 @@
 ---
-- block:
+- name: Authorize new members to network task
+  when:
+    - not ansible_check_mode
+  tags:
+    - configuration
+  become: false
+  block:
     - name: Authorize new members to network
-      uri:
+      ansible.builtin.uri:
         url: "{{ zerotier_api_url }}/api/network/{{ zerotier_network_id }}/member/{{ ansible_local['zerotier']['node_id'] }}"
         method: POST
         headers:
@@ -18,7 +24,7 @@
           ansible_local['zerotier']['networks'][zerotier_network_id]['status'] != 'OK'
 
     - name: Configure members in network
-      uri:
+      ansible.builtin.uri:
         url: "{{ zerotier_api_url }}/api/network/{{ zerotier_network_id }}/member/{{ ansible_local['zerotier']['node_id'] }}"
         method: POST
         headers:
@@ -31,9 +37,3 @@
         body_format: json
       register: conf_apiresult
       delegate_to: "{{ zerotier_api_delegate }}"
-
-  when:
-    - not ansible_check_mode
-  tags:
-    - configuration
-  become: false

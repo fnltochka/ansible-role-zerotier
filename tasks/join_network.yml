@@ -1,6 +1,6 @@
 ---
 - name: Join ZeroTier network
-  command: zerotier-cli join {{ zerotier_network_id }}
+  ansible.builtin.command: zerotier-cli join {{ zerotier_network_id }}
   args:
     creates: /var/lib/zerotier-one/networks.d/{{ zerotier_network_id }}.conf
   tags:

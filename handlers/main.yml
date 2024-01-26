@@ -1,13 +1,21 @@
 ---
 # handlers file for ansible-role-zerotier
-- name: start zerotier-one
-  service: name=zerotier-one status=started
+- name: Start zerotier-one
+  ansible.builtin.service:
+    name: zerotier-one
+    state: started
 
-- name: stop zerotier-one
-  service: name=zerotier-one status=stopped
+- name: Stop zerotier-one
+  ansible.builtin.service:
+    name: zerotier-one
+    state: stopped
 
-- name: restart zerotier-one
-  service: name=zerotier-one status=restarted
+- name: Restart zerotier-one
+  ansible.builtin.service:
+    name: zerotier-one
+    state: restarted
 
-- name: enable zerotier-one
-  service: name=zerotier-one enabled=yes
+- name: Enable zerotier-one
+  ansible.builtin.service:
+    name: zerotier-one
+    enabled: true

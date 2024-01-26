@@ -1,21 +1,25 @@
 ---
-# tasks file for ansible-role-zerotier
-- import_tasks: install.yml
+- name: Tasks file install.yml
+  ansible.builtin.import_tasks: install.yml
   when:
     - not skip_install | default(false) | bool
 
-- block:
+- name: Update, re-gather ansible_local facts
+  block:
     - name: Update ansible_local facts
-      script: set_facts.sh
+      ansible.builtin.script: set_facts.sh
 
     - name: Re-gather ansible_local facts
-      setup: filter=ansible_local
+      ansible.builtin.setup:
+        filter: ansible_local
 
-- import_tasks: authorize_node.yml
+- name: Tasks file authorize_node.yml
+  ansible.builtin.import_tasks: authorize_node.yml
   when:
     - zerotier_api_accesstoken != ''
     - ansible_local['zerotier']['node_id'] is defined
 
-- import_tasks: join_network.yml
+- name: Tasks file join_network.yml
+  ansible.builtin.import_tasks: join_network.yml
   when:
     - zerotier_network_id is defined
