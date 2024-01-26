@@ -4,4 +4,4 @@
   args:
     creates: /var/lib/zerotier-one/networks.d/{{ zerotier_network_id }}.conf
   tags:
-  - configuration
+    - configuration

@@ -1,30 +1,29 @@
 ---
-
 - include_tasks: install/{{ ansible_facts['os_family'] }}.yml
   tags:
-  - installation
-  - repositories
+    - installation
+    - repositories
 
 - block: #Install and enable zerotier-one
-  - name: Install zerotier-one
-    package:
-      name: zerotier-one
-      state: present
-      update_cache: yes
-    register: zerotier_client
+    - name: Install zerotier-one
+      package:
+        name: zerotier-one
+        state: present
+        update_cache: yes
+      register: zerotier_client
 
-  - name: Start zerotier-one service
-    service:
-      name: zerotier-one
-      state: started
-    when:
-    - zerotier_client is succeeded
-    notify:
-    - enable zerotier-one
+    - name: Start zerotier-one service
+      service:
+        name: zerotier-one
+        state: started
+      when:
+        - zerotier_client is succeeded
+      notify:
+        - enable zerotier-one
 
   when:
-  - zerotier_repo is not defined or zerotier_repo is succeeded
-  - not ansible_check_mode
+    - zerotier_repo is not defined or zerotier_repo is succeeded
+    - not ansible_check_mode
   tags:
-  - installation
-  - packages
+    - installation
+    - packages

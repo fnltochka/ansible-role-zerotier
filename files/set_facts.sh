@@ -6,7 +6,7 @@ NETWORKS=$(zerotier-cli listnetworks | tail -n+2)
 
 function file_content {
     if [ ! -z "$NETWORKS" ]; then
-        network_count=$(echo "$NETWORKS" |wc -l)
+        network_count=$(echo "$NETWORKS" | wc -l)
         counter=1
 
         echo "{"
@@ -17,8 +17,8 @@ function file_content {
             echo "    \"${network[2]}\": {"
             if [ ${network[4]} = "ACCESS_DENIED" ]; then
                 echo "        \"status\":\"${network[4]}\","
-            echo "        \"device\":\"${network[6]}\""
-        else
+                echo "        \"device\":\"${network[6]}\""
+            else
                 echo "        \"status\":\"${network[5]}\","
                 echo "        \"device\":\"${network[7]}\""
             fi
@@ -28,7 +28,7 @@ function file_content {
                 echo "    },"
             fi
             ((counter++))
-        done <<< $NETWORKS
+        done <<<$NETWORKS
         echo "  }"
         echo "}"
     else
@@ -40,6 +40,6 @@ if [ ! -d "$FACTS_DIR" ]; then
     mkdir -p $FACTS_DIR
 fi
 
-file_content > $FACT_FILE
+file_content >$FACT_FILE
 
 # TODO: Handle statuses other than OK and ACCESS_DENIED
