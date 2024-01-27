@@ -40,25 +40,25 @@ _Description_: Optional description for a member.
 ### zerotier_allow_managed
 
 _Type_: string  
-_Default value_: `"1"`  
+_Default value_: `true`  
 _Description_: Allow ZeroTier to set IP Addresses and Routes ( local/private ranges only)
 
 ### zerotier_allow_global
 
 _Type_: string  
-_Default value_: `"0"`  
+_Default value_: `false`  
 _Description_: Allow ZeroTier to set Global/Public/Not-Private range IPs and Routes.
 
 ### zerotier_allow_default
 
 _Type_: string  
-_Default value_: `"0"`  
+_Default value_: `false`  
 _Description_: Allow ZeroTier to set the Default Route on the system.
 
 ### zerotier_allow_dns
 
 _Type_: string  
-_Default value_: `"0"`  
+_Default value_: `false`  
 _Description_: Allow ZeroTier to set DNS servers.
 
 ### zerotier_api_accesstoken
@@ -87,7 +87,7 @@ _Description_: Option to delegate tasks for Zerotier API calls. This is useful i
     zerotier_network_id: 1234567890qwerty
     zerotier_api_accesstoken: "{{ vault_zerotier_accesstoken }}"
     zerotier_register_short_hostname: true
-    zerotier_allow_dns: "1"
+    zerotier_allow_dns: true
 
   roles:
     - { role: fnltochka.zerotier, become: true }

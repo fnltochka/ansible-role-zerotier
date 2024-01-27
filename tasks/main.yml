@@ -4,15 +4,6 @@
   when:
     - not skip_install | default(false) | bool
 
-- name: Update, re-gather ansible_local facts
-  block:
-    - name: Update ansible_local facts
-      ansible.builtin.script: set_facts.sh
-
-    - name: Re-gather ansible_local facts
-      ansible.builtin.setup:
-        filter: ansible_local
-
 - name: Tasks file authorize_node.yml
   ansible.builtin.import_tasks: authorize_node.yml
   when:

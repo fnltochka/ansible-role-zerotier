@@ -1,9 +1,15 @@
 ---
 - name: Set network configuration
   ansible.builtin.command: |
-    zerotier-cli set {{ zerotier_network_id }} allowManaged={{ zerotier_allow_managed | default("1") }}
-    allowGlobal={{ zerotier_allow_global | default("0") }} allowDefault={{ zerotier_allow_default | default("0") }}
-    allowDNS={{ zerotier_allow_dns | default("0") }}
+    zerotier-cli set {{ zerotier_network_id }}
+    allowManaged={{ zerotier_allow_managed | default(true) | ternary(1, 0) }}
+    allowGlobal={{ zerotier_allow_global | default(false) | ternary(1, 0) }}
+    allowDefault={{ zerotier_allow_default | default(false) | ternary(1, 0) }}
+    allowDNS={{ zerotier_allow_dns | default(false) | ternary(1, 0) }}
+  changed_when:
+    ansible_local['zerotier']['networks'][zerotier_network_id]['allowManaged'] != (zerotier_allow_managed | default(true)) or
+    ansible_local['zerotier']['networks'][zerotier_network_id]['allowGlobal'] != (zerotier_allow_global | default(false)) or
+    ansible_local['zerotier']['networks'][zerotier_network_id]['allowDefault'] != (zerotier_allow_default | default(false)) or
+    ansible_local['zerotier']['networks'][zerotier_network_id]['allowDNS'] != (zerotier_allow_dns | default(false))
   tags:
     - configuration
-# TODO: Module is not idempotent
