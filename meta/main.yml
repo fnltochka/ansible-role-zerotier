@@ -1,6 +1,6 @@
 galaxy_info:
   author: Marcus Meurs, FnlTochka
-  description: Install zerotier-one package and add new members to a zerotier network
+  description: Installation and configuration of the zerotier-one package. Improved fork m4rcu5nl.zerotier-one
   company: None
 
   # If the issue tracker for your role is not on github, uncomment the
